@@ -1,0 +1,130 @@
+/* General Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+/* Hero Section */
+.hero-section {
+  background-color: #0d6efd;
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.hero-section h1 {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* How It Works Section */
+.how-it-works {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.how-it-works h2 {
+  margin-bottom: 50px;
+  color: #333;
+  font-weight: bold;
+}
+
+.step-card {
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  transition: transform 0.3s;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+}
+
+.step-icon {
+  background-color: #e8f1ff;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-icon i {
+  font-size: 32px;
+  color: #0d6efd;
+}
+
+/* Departments Section */
+.departments-section {
+  padding: 50px 0;
+}
+
+.departments-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.department-card {
+  transition: transform 0.3s;
+}
+
+.department-card:hover {
+  transform: translateY(-5px);
+}
+
+.department-card .card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+
+.department-card .card-body {
+  padding: 25px;
+}
+
+.department-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Error and Loading States */
+.error-loading, .loading-spinner {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.error-loading h3 {
+  color: #dc3545;
+  margin-bottom: 15px;
+}
+
+/* Form Styles */
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Footer Styles */
+footer a:hover {
+  text-decoration: underline;
+}

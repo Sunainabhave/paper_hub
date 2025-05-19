@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= department %> - Dayananda Sagar Paper Hub</title>
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Header with blue background -->
+  <header class="bg-primary text-white p-4">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1><a href="/" class="text-white text-decoration-none">Dayananda Sagar Paper Hub</a></h1>
+        <div>
+          <% if (user) { %>
+            <span class="me-3">Hello, <%= user.username %></span>
+            <a href="/logout" class="btn btn-light btn-sm">Logout</a>
+          <% } else { %>
+            <a href="/login" class="btn btn-light btn-sm">Login</a>
+            <a href="/register" class="btn btn-outline-light btn-sm">Register</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Department content -->
+  <div class="container py-5">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><%= department %></li>
+      </ol>
+    </nav>
+
+    <h2><%= department %> Papers</h2>
+
+    <!-- Admin Upload Form -->
+    <% if (user?.role) { %>
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">Upload Paper or Scheme (Admin Only)</div>
+    <div class="card-body">
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="department" value="<%= department %>">
+
+        <div class="mb-3">
+          <label for="year" class="form-label">Year</label>
+          <select name="year" id="year" class="form-select" required>
+            <option value="1">1st Year</option>
+            <option value="2">2nd Year</option>
+            <option value="3">3rd Year</option>
+            <option value="4">4th Year</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="subject" class="form-label">Subject</label>
+          <input type="text" class="form-control" id="subject" name="subject" placeholder="E.g., ACD, FE" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="name" class="form-label">Paper Name</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="type" class="form-label">Type</label>
+          <select class="form-select" id="type" name="type" required>
+            <option value="Question">Question Paper</option>
+            <option value="Scheme">Scheme</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="file" class="form-label">File</label>
+          <input type="file" class="form-control" id="file" name="file" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </form>
+    </div>
+  </div>
+<% } %>
+
+
+    <!-- Papers List -->
+    <div class="row">
+      <div class="col-12">
+        <h3>Available Papers</h3>
+        <% if (papers && papers.length > 0) { %>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% papers.forEach(paper => { %>
+                  <tr>
+                    <td><%= paper.name %></td>
+                    <td><span class="badge <%= paper.type === 'Question' ? 'bg-info' : 'bg-success' %>">
+                        <%= paper.type %>
+                      </span>
+                    </td>
+                    <td>
+                      <a href="/uploads/<%= paper.file_path %>" download class="btn btn-primary btn-sm">
+                        <i class="bi bi-download"></i> Download
+                      </a>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        <% } else { %>
+          <div class="alert alert-info">No papers available for this department yet.</div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-white py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>DSU Paper Hub</h5>
+          <p>Access and download old question papers and scheme papers for Dayananda Sagar College.</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="/" class="text-white">Home</a></li>
+            <li><a href="/login" class="text-white">Login</a></li>
+            <li><a href="/register" class="text-white">Register</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Contact Us</h5>
+          <p>Dayananda Sagar University, Bangalore, India</p>
+          <p>contact@dsu.edu</p>
+          <p>+91 9876543210</p>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        © <%= new Date().getFullYear() %> Dayananda Sagar Paper Hub. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
